@@ -7,7 +7,7 @@ import { Post } from "../types/Post";
 
 const emailsPermitidos = [
   "iugorsette@gmail.com",
-  "renatalazarino.nutri@gmai.com"
+  "renatalazarino.nutri@gmail.com"
 ];
 
 export const createPost = async (post: Omit<Post, "id" | "createdAt" | "imageUrl">, file: File) => {
@@ -21,7 +21,7 @@ export const createPost = async (post: Omit<Post, "id" | "createdAt" | "imageUrl
     if (!emailsPermitidos.includes(user.email!)) {
       throw new Error("E-mail não permitido!");
     }
-    
+
     console.log("Fazendo upload da imagem...");
     const storageRef = ref(storage, `blog/${file.name}`);
     await uploadBytes(storageRef, file);
