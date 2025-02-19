@@ -4,6 +4,10 @@ import { FaGoogle, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { useAuth } from "../context/AuthContext";
 
+const emailsPermitidos = [
+  "renatalazarino.nutri@gmail.com",
+  "iugorsette@gmail.com"
+]
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -32,6 +36,13 @@ export const Navbar = () => {
             <Link to="/blog" className={`${isActive("/blog")} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
               Blog
             </Link>
+            {
+              emailsPermitidos.includes(user?.email || "") && (
+                <Link to="/new-post" className={`${isActive("/new-post")} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
+                  Novo Post
+                </Link>
+              )
+            }
             {/* <a
               href="https://wa.me/5531971630379?text=Olá%0AQuero%20iniciar%20minha%20jornada%20para%20uma%20vida%20mais%20saudável!"
               target="_blank"
