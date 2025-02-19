@@ -24,7 +24,7 @@ export const Navbar = () => {
             <Link to="/" className={`${isActive('/')} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
               Home
             </Link>
-            <Link to="/about" className={`${isActive('/about')} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
+            <Link to="/nutricao-personalizada" className={`${isActive('/nutricao-personalizada')} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
               Sobre
             </Link>
             <a 
@@ -55,7 +55,7 @@ export const Navbar = () => {
             <Link to="/" className="block px-3 py-2 text-base font-medium text-secondary hover:bg-gray-50">
               Home
             </Link>
-            <Link to="/about" className="block px-3 py-2 text-base font-medium text-secondary hover:bg-gray-50">
+            <Link to="/nutricao-personalizada" className="block px-3 py-2 text-base font-medium text-secondary hover:bg-gray-50">
               Sobre
             </Link>
             <a href="https://wa.me/5531971630379?text=Olá%0AQuero%20iniciar%20minha%20jornada%20para%20uma%20vida%20mais%20saudável!" target="_blank"
