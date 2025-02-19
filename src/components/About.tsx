@@ -6,7 +6,8 @@ export const About = () => {
         <h2 className="text-4xl font-script text-primary mb-4">Sobre a nutri</h2>
         <img src={nutriFoto} alt="Nutricionista" className="h-96 w-full object-cover rounded-lg" />
         <p className="mt-4 max-w-2xl text-gray-500 lg:mx-auto">
-          Como nutricionista dedicada, sou apaixonada por ajudar as pessoas a alcançarem seus objetivos de saúde por meio de orientações nutricionais personalizadas e mudanças de estilo de vida sustentáveis.
+          Como nutricionista dedicada, sou apaixonada por ajudar as pessoas a alcançarem seus objetivos de saúde e bem-estar.
+        Se você busca uma alimentação equilibrada para emagrecer ou ganhar massa muscular, estou aqui para te ajudar.
         </p>
       </div>
       
