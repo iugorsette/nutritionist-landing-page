@@ -1,10 +1,11 @@
+import logo from '../assets/logo.png';
 export const Footer = () => {
   return (
     <footer className="bg-white">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <img src="./src/assets/logo.png" alt="Renata Lazarino" className="h-12 w-auto" />
+            <img src={logo} alt="Renata Lazarino" className="h-12 w-auto" />
             <p className="mt-4 text-sm text-gray-500">
               Comer bem é um ato de amor-próprio!
             </p>

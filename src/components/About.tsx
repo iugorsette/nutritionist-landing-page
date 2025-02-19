@@ -1,9 +1,10 @@
+import nutriFoto from '../assets/nutri_1.jpeg';
 export const About = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="lg:text-center">
         <h2 className="text-4xl font-script text-primary mb-4">Sobre a nutri</h2>
-        <img src="./src/assets/nutri_1.jpeg" alt="Nutricionista" className="h-96 w-full object-cover rounded-lg" />
+        <img src={nutriFoto} alt="Nutricionista" className="h-96 w-full object-cover rounded-lg" />
         <p className="mt-4 max-w-2xl text-gray-500 lg:mx-auto">
           Como nutricionista dedicada, sou apaixonada por ajudar as pessoas a alcançarem seus objetivos de saúde por meio de orientações nutricionais personalizadas e mudanças de estilo de vida sustentáveis.
         </p>
