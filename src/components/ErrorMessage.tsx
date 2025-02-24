@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import errorImage from "../assets/error.webp";
 
-export const ErrorPage = ({ message = "Ocorreu um erro inesperado!" }) => {
+export const ErrorMessage = ({ message = "Ocorreu um erro inesperado!" }) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center px-6">
       {/* Imagem de erro */}

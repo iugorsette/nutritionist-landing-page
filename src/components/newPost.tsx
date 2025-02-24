@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createPost } from "../services/postServices";
+import { auth } from "../firebase"; 
 
 export const NewPost = () => {
   const [title, setTitle] = useState("");
@@ -15,21 +16,50 @@ export const NewPost = () => {
       .replace(/[^a-z0-9-]/g, "") 
       .trim();
   };
-  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file) return alert("Selecione uma imagem!");
+    
+    if (!title.trim() || !content.trim()) {
+      return alert("Título e conteúdo são obrigatórios!");
+    }
   
-    const formattedSlug = formatSlug(slug || title); 
+    if (!file) {
+      return alert("Selecione uma imagem!");
+    }
   
-    const response = await createPost({ title, excerpt, content, slug: formattedSlug }, file);
+    const formattedSlug = formatSlug(slug || title);
+    const user = auth.currentUser;
   
-    if (response.success) {
-      alert("Post criado com sucesso!");
-    } else {
-      alert("Erro ao criar post: " + response.error);
+    if (!user) {
+      return alert("Você precisa estar logado para criar um post!");
+    }
+  
+    const postData = {
+      title,
+      excerpt,
+      content,
+      slug: formattedSlug,
+      authorId: user.uid,
+      authorName: user.displayName || "Usuário desconhecido", 
+      authorAvatar: user.photoURL || "",
+      createdAt: new Date(),
+    };
+  
+    try {
+      const response = await createPost(postData, file);
+  
+      if (response.success) {
+        alert("Post criado com sucesso!");
+      } else {
+        alert("Erro ao criar post: " + response.error);
+      }
+    } catch (error) {
+      console.error("Erro ao criar post:", error);
+      alert("Ocorreu um erro ao salvar o post.");
     }
   };
+  
+  
   
 
   return (

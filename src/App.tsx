@@ -1,28 +1,28 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
-import { Hero } from './components/Hero'
-import { About } from './components/About'
 import { Footer } from './components/Footer'
-import { Blog } from './components/Blog'
-import { Post } from './components/Post'
 import { NewPost } from './components/newPost'
 import { AuthProvider } from './context/AuthContext'
-import { ErrorPage } from './components/Error'
+import { ErrorMessage } from './components/ErrorMessage'
+
+import { Hero } from './pages/Hero'
+import { About } from './pages/About'
+import { Blog } from './pages/Blog'
+import { Post } from './pages/Post'
 
 function App() {
   return (
     <AuthProvider>
       <div className="min-h-screen bg-white">
         <Navbar />
-
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/nutricao-personalizada" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<Post />} />
           <Route path="/new-post" element={<NewPost />} />
-          <Route path="*" element={<ErrorPage/>} />
+          <Route path="*" element={<ErrorMessage />} />
         </Routes>
         <Footer />
       </div>

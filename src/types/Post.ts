@@ -8,4 +8,7 @@ export interface Post {
   imageUrl: string;
   slug: string;
   createdAt: Timestamp; 
+  authorId: string;
+  authorName: string;
+  authorAvatar: string;
 }
