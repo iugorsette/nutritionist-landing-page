@@ -8,8 +8,8 @@
 |🚀 | Pesquisa de Posts	| 🗹 |
 |🚀 | Compartilhamento em Redes Sociais	| ☐ |
 |🚀 | SEO Melhorado	| ☐ |
-|🚀 | Dark Mode	| ☐ |
-|🚀 | Painel de Administração	| ☐ |
+|🚀 | Dark Mode	| 🗹  |
+|🚀 | Painel de Administração	| 🗹 |
 
 ## 📌 Próximos Passos
 Agora que o sistema de comentários está funcionando, podemos continuar melhorando o blog! Algumas ideias:

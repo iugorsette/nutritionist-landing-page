@@ -1,24 +1,25 @@
 import logo from '../assets/logo.png';
+
 export const Footer = () => {
   return (
-    <footer className="bg-white">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <img src={logo} alt="Renata Lazarino" className="h-12 w-auto" />
-            <p className="mt-4 text-sm text-gray-500">
+            <img src={logo} alt="Renata Lazarino" className="h-14 w-auto" />
+            <p className="mt-4 text-sm text-gray-500 dark:text-gray-300">
               Comer bem é um ato de amor-próprio!
             </p>
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Contato</h3>
-            <ul className="mt-4 space-y-4">
-              <li className="text-base text-gray-500">
+            <ul className="mt-2 space-y-2">
+              <li className="text-base text-gray-500 dark:text-gray-300">
                 <a href="mailto:renatalazarino.nutri@gmail.com" className="hover:text-secondary">
                   renatalazarino.nutri@gmail.com
                 </a>
               </li>
-              <li className="text-base text-gray-500">
+              <li className="text-base text-gray-500 dark:text-gray-300">
                 <a href="https://wa.me/5531971630379?text=Olá%0AQuero%20iniciar%20minha%20jornada%20para%20uma%20vida%20mais%20saudável!" target="_blank"
                     className="hover:text-secondary">
                   +55 31 9 7163-0379
@@ -28,7 +29,7 @@ export const Footer = () => {
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase"> Siga-me </h3>
-            <div className="mt-4 flex space-x-6">
+            <div className="mt-2 flex space-x-2">
               <a href="https://www.instagram.com/renatalazarino.nutri" target="_blank" className="text-gray-400 hover:text-secondary">
                 <span className="sr-only">Instagram</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -42,8 +43,8 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-gray-200 pt-8">
-          <p className="text-base text-gray-400 text-center">
+        <div className="mt-4 border-t border-gray-200 dark:border-gray-700 pt-8">
+          <p className="text-base  text-gray-700 dark:text-gray-400 text-center">
             &copy; {new Date().getFullYear()} Renata Lazarino. All rights reserved - Feito com ❤️ por{' '}
             <a href="https://iugorsette.vercel.app/" target="_blank" className="hover:text-secondary">
               Iugor Sette

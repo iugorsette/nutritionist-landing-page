@@ -4,6 +4,7 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { BlogCard } from "./BlogCard";
 import { Post } from "../types/Post";
 import { Search, X } from "lucide-react";
+import { Loading } from "./Loading";
 
 export const BlogList = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -34,7 +35,7 @@ export const BlogList = () => {
   );
 
   if (loading) {
-    return <p className="text-center py-16">Carregando...</p>;
+    return <Loading />;
   }
 
   return (
