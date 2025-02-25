@@ -10,23 +10,26 @@ import { Hero } from './pages/Hero'
 import { About } from './pages/About'
 import { Blog } from './pages/Blog'
 import { Post } from './pages/Post'
+import { HelmetProvider } from 'react-helmet-async'
 
 function App() {
   return (
-    <AuthProvider>
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/nutricao-personalizada" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<Post />} />
-          <Route path="/new-post" element={<NewPost />} />
-          <Route path="*" element={<ErrorMessage />} />
-        </Routes>
-        <Footer />
-      </div>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <div className="min-h-screen bg-white">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Hero />} />
+            <Route path="/nutricao-personalizada" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<Post />} />
+            <Route path="/new-post" element={<NewPost />} />
+            <Route path="*" element={<ErrorMessage />} />
+          </Routes>
+          <Footer />
+        </div>
+      </AuthProvider>
+    </HelmetProvider>
   )
 }
 
