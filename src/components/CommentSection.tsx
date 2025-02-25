@@ -72,8 +72,8 @@ export const CommentSection = ({ postId }: CommentSectionProps) => {
   };
 
   return (
-    <div className="mt-8 p-6 bg-gray-100 rounded-lg">
-      <h3 className="text-xl font-semibold mb-4">Comentários</h3>
+    <div className="mt-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg">
+      <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Comentários</h3>
 
       {user ? (
         <form onSubmit={handleAddComment} className="mb-4">
@@ -84,8 +84,8 @@ export const CommentSection = ({ postId }: CommentSectionProps) => {
             required
             className="w-full px-3 py-2 border rounded-md"
           />
-          <div className="flex justify-end">
-            <button type="submit" className="mt-2 bg-primary text-white px-4 py-2 rounded-md">
+          <div className="flex justify-end dark">
+            <button type="submit" className="mt-2 bg-primary dark:bg-primary-alert text-white px-4 py-2 rounded-md">
               Comentar
             </button>
           </div>
@@ -110,7 +110,7 @@ export const CommentSection = ({ postId }: CommentSectionProps) => {
             comments.map((comment) => (
               <li key={comment.id} className="border-b py-2 flex justify-between items-center group">
                 <div className="w-full">
-                  <p className="font-semibold">{comment.authorName}</p>
+                  <p className="font-semibold text-gray-900 dark:text-gray-50">{comment.authorName}</p>
 
                   {editingComment === comment.id ? (
                     <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ export const CommentSection = ({ postId }: CommentSectionProps) => {
                     </div>
                   ) : (
                     <>
-                      <p className="text-gray-700">{comment.content}</p>
+                      <p className="text-gray-700 dark:text-gray-400">{comment.content}</p>
                       <p className="text-sm text-gray-500">
                         {new Date(comment.createdAt.toDate()).toLocaleString()}
                       </p>

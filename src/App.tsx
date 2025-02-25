@@ -3,9 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { AuthProvider } from "./context/AuthContext";
-import { ErrorMessage } from "./components/ErrorMessage";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ThemeProvider } from "./context/ThemeContext";  // Importação do contexto de tema
 
+import { ErrorMessage } from "./components/ErrorMessage";
 import { NewPost } from "./pages/newPost";
 import { Hero } from "./pages/Hero";
 import { About } from "./pages/About";
@@ -17,25 +17,23 @@ import { CreatePostPage } from "./pages/CreatePostPage";
 function App() {
   return (
     <AuthProvider>
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/nutricao-personalizada" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<Post />} />
-          <Route path="/new-post" element={<NewPost />} />
-          
-          <Route element={<ProtectedRoute adminOnly />}>
+      <ThemeProvider>
+        <div className="min-h-screen bg-white dark:bg-gray-900">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Hero />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/admin/new" element={<CreatePostPage />} />
             <Route path="/admin/edit/:id" element={<CreatePostPage />} />
-          </Route>
-
-          <Route path="*" element={<ErrorMessage />} />
-        </Routes>
-        <Footer />
-      </div>
+            <Route path="/nutricao-personalizada" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<Post />} />
+            <Route path="/new-post" element={<NewPost />} />
+            <Route path="*" element={<ErrorMessage />} />
+          </Routes>
+          <Footer />
+        </div>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

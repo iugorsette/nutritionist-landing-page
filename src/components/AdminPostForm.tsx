@@ -104,48 +104,52 @@ export const AdminPostForm = ({ onPostUpdated }: AdminPostFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg space-y-4">
-      <h2 className="text-2xl font-bold mb-4">{id ? "Editar Post" : "Novo Post"}</h2>
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg space-y-4">
+      <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{id ? "Editar Post" : "Novo Post"}</h2>
 
-      <label className="block text-sm font-medium text-gray-700">Título</label>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Título</label>
       <input
         type="text"
         name="title"
         value={postForm.title}
         onChange={handleChange}
         required
-        className="w-full px-3 py-2 border rounded-md"
+        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
       />
 
-      <label className="block text-sm font-medium text-gray-700">Resumo</label>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Resumo</label>
       <input
         type="text"
         name="excerpt"
         value={postForm.excerpt}
         onChange={handleChange}
         required
-        className="w-full px-3 py-2 border rounded-md"
+        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
       />
 
-      <label className="block text-sm font-medium text-gray-700">Conteúdo</label>
-      <ReactQuill value={postForm.content} onChange={(value) => setPostForm((prev) => ({ ...prev, content: value }))} className="bg-white border rounded-md" />
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Conteúdo</label>
+      <ReactQuill
+        value={postForm.content}
+        onChange={(value) => setPostForm((prev) => ({ ...prev, content: value }))}
+        className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-gray-900 dark:text-white"
+      />
 
-      <label className="block text-sm font-medium text-gray-700">Slug</label>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Slug</label>
       <input
         type="text"
         name="slug"
         value={postForm.slug}
         onChange={handleChange}
-        className="w-full px-3 py-2 border rounded-md"
+        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
       />
 
-      <label className="block text-sm font-medium text-gray-700">Imagem</label>
-      <input type="file" onChange={handleFileChange} className="w-full text-sm text-gray-500" />
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Imagem</label>
+      <input type="file" onChange={handleFileChange} className="w-full text-sm text-gray-500 dark:text-gray-400" />
 
       {previewUrl && <img src={previewUrl} alt="Preview" className="w-full h-48 object-cover mt-2 rounded-md" />}
 
       <div className="flex justify-end">
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        <button type="submit" className="bg-blue-500 dark:bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-700">
           {id ? "Atualizar Post" : "Criar Post"}
         </button>
       </div>

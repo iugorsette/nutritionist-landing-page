@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaGoogle, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa"; 
+import { FaGoogle, FaSignOutAlt, FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { useAuth } from "../context/AuthContext";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem("theme") === "dark");
   const location = useLocation();
 
   const { user, role, signInWithGoogle, logout } = useAuth();
 
-  const isActive = (path: string) => (location.pathname === path ? "text-primary" : "text-secondary");
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+
+  const isActive = (path: string) => (location.pathname === path ? "text-primary dark:text-gray-300" : "text-secondary dark:text-gray-400");
 
   return (
-    <nav className="bg-white shadow-sm">
+    <nav className="bg-white dark:bg-gray-900 shadow-sm dark:shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -37,8 +50,12 @@ export const Navbar = () => {
                 Painel de Admin
               </Link>
             )}
-          
-          
+
+            {/* Botão de Dark Mode */}
+            <button onClick={toggleDarkMode} className="text-secondary dark:text-gray-300 hover:text-primary dark:hover:text-yellow-400 transition">
+              {darkMode ? <FaSun className="w-6 h-6" /> : <FaMoon className="w-6 h-6" />}
+            </button>
+
             {/* Botão de Login/Logout */}
             <div className="flex items-center">
               {user ? (
@@ -66,7 +83,7 @@ export const Navbar = () => {
 
           {/* Menu Mobile */}
           <div className="sm:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-secondary">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-secondary dark:text-gray-300">
               {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
             </button>
           </div>
@@ -75,18 +92,22 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="sm:hidden">
+        <div className="sm:hidden bg-white dark:bg-gray-800">
           <div className="pt-2 pb-3 space-y-1">
-            <Link to="/" className="block px-3 py-2 text-base font-medium text-secondary hover:bg-gray-50">
+            <Link to="/" className="block px-3 py-2 text-base font-medium text-secondary dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
               Home
             </Link>
-            <Link to="/nutricao-personalizada" className="block px-3 py-2 text-base font-medium text-secondary hover:bg-gray-50">
+            <Link to="/nutricao-personalizada" className="block px-3 py-2 text-base font-medium text-secondary dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
               Sobre
             </Link>
-            <Link to="/blog" className="block px-3 py-2 text-base font-medium text-secondary hover:bg-gray-50">
+            <Link to="/blog" className="block px-3 py-2 text-base font-medium text-secondary dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
               Blog
             </Link>
-        
+
+            {/* Botão de Dark Mode (Mobile) */}
+            <button onClick={toggleDarkMode} className="w-full flex justify-center py-2 text-secondary dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+              {darkMode ? <FaSun className="w-6 h-6" /> : <FaMoon className="w-6 h-6" />}
+            </button>
 
             {/* Mobile Login/Logout */}
             <div className="mt-4">
