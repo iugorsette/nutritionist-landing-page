@@ -1,7 +1,7 @@
 import nutriFoto from '../assets/nutri_renata.webp';
 export const About = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div className="lg:text-center">
         <h2 className="text-4xl font-script text-primary mb-4">Sobre a nutri</h2>
         <img src={nutriFoto} alt="Nutricionista" className="h-96 w-full object-cover rounded-lg" />
