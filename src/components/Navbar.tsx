@@ -4,15 +4,11 @@ import { FaGoogle, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { useAuth } from "../context/AuthContext";
 
-const emailsPermitidos = [
-  "renatalazarino.nutri@gmail.com",
-  "iugorsette@gmail.com"
-]
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const { user, signInWithGoogle, logout } = useAuth();
+  const { user, role, signInWithGoogle, logout } = useAuth();
 
   const isActive = (path: string) => (location.pathname === path ? "text-primary" : "text-secondary");
 
@@ -36,22 +32,13 @@ export const Navbar = () => {
             <Link to="/blog" className={`${isActive("/blog")} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
               Blog
             </Link>
-            {
-              emailsPermitidos.includes(user?.email || "") && (
-                <Link to="/admin" className={`${isActive("/admin")} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
-                  Painel de Admin
-                </Link>
-              )
-            }
-            {/* <a
-              href="https://wa.me/5531971630379?text=Olá%0AQuero%20iniciar%20minha%20jornada%20para%20uma%20vida%20mais%20saudável!"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-full text-sm font-medium"
-            >
-              Fale Comigo
-            </a> */}
-
+            {role === "admin" && (
+              <Link to="/admin" className={`${isActive("/admin")} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
+                Painel de Admin
+              </Link>
+            )}
+          
+          
             {/* Botão de Login/Logout */}
             <div className="flex items-center">
               {user ? (

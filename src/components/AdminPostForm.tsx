@@ -85,7 +85,7 @@ export const AdminPostForm = ({ onPostUpdated }: AdminPostFormProps) => {
     try {
       let response;
       if (id) {
-        response = await updatePost(id, postData as any, file);
+        response = await updatePost(id, postData as any, file as File);
         alert("Post atualizado com sucesso!");
       } else {
         response = await createPost(postData, file as File);

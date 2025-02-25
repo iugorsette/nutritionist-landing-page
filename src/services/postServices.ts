@@ -4,51 +4,45 @@ import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Post } from "../types/Post";
 
+const ALLOWED_EMAILS = ["iugorsette@gmail.com", "renatalazarino.nutri@gmail.com"];
 
-const emailsPermitidos = [
-  "iugorsette@gmail.com",
-  "renatalazarino.nutri@gmail.com"
-];
+
+const getAuthenticatedUser = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (!user) throw new Error("Usuário não autenticado!");
+  if (!ALLOWED_EMAILS.includes(user.email!)) throw new Error("E-mail não permitido!");
+
+  return user;
+};
+
+const uploadImage = async (file: File): Promise<string> => {
+  const storageRef = ref(storage, `blog/${file.name}`);
+  await uploadBytes(storageRef, file);
+  return await getDownloadURL(storageRef);
+};
+
 export const getPostById = async (postId: string) => {
   try {
-    const docRef = doc(db, "posts", postId);
-    const docSnap = await getDoc(docRef);
+    const postSnap = await getDoc(doc(db, "posts", postId));
 
-    if (docSnap.exists()) {
-      return {
-        success: true,
-        post: {
-          id: docSnap.id,
-          ...docSnap.data(),
-        } as Post,
-      };
-    } else {
+    if (!postSnap.exists()) {
       return { success: false, error: "Post não encontrado." };
     }
+
+    return { success: true, post: { id: postSnap.id, ...postSnap.data() } as Post };
   } catch (error) {
     console.error("Erro ao buscar post:", error);
     return { success: false, error };
-  }  
-}
+  }
+};
 
 export const createPost = async (post: Omit<Post, "id" | "createdAt" | "imageUrl">, file: File) => {
   try {
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const user = getAuthenticatedUser();
+    const imageUrl = await uploadImage(file);
 
-    if (!user) {
-      throw new Error("Usuário não autenticado!");
-    }
-    if (!emailsPermitidos.includes(user.email!)) {
-      throw new Error("E-mail não permitido!");
-    }
-
-    console.log("Fazendo upload da imagem...");
-    const storageRef = ref(storage, `blog/${file.name}`);
-    await uploadBytes(storageRef, file);
-    const imageUrl = await getDownloadURL(storageRef);
-
-    console.log("Criando post no Firestore...");
     await addDoc(collection(db, "posts"), {
       ...post,
       imageUrl,
@@ -63,20 +57,14 @@ export const createPost = async (post: Omit<Post, "id" | "createdAt" | "imageUrl
   }
 };
 
-
 export const updatePost = async (
   postId: string,
-  post: Partial<Omit<Post, "id" | "imageUrl">>, 
-  file: File | null
+  post: Partial<Omit<Post, "id" | "imageUrl" | "createdAt">>, 
+  file?: File
 ) => {
   try {
-    const auth = getAuth();
-    const user = auth.currentUser;
-
-    if (!user) {
-      throw new Error("Usuário não autenticado!");
-    }
-    if (!emailsPermitidos.includes(user.email!)) {
+    const user = getAuthenticatedUser();
+    if (!ALLOWED_EMAILS.includes(user.email!)) {
       throw new Error("E-mail não permitido!");
     }
 
@@ -87,7 +75,7 @@ export const updatePost = async (
       throw new Error("Post não encontrado!");
     }
 
-    let imageUrl = postSnap.data().imageUrl || "";
+    let imageUrl = postSnap.data().imageUrl;
 
     if (file) {
       console.log("Fazendo upload da nova imagem...");
@@ -96,10 +84,10 @@ export const updatePost = async (
       imageUrl = await getDownloadURL(storageRef);
     }
 
-    const postData = { ...post, imageUrl };
-    delete postData.createdAt; 
+    const postData: any = { ...post, imageUrl };
+    delete postData.createdAt;
+    console.log("Atualizando post no Firestore...", postData);
 
-    console.log("Atualizando post no Firestore...");
     await updateDoc(postRef, postData);
 
     return { success: true };
@@ -108,3 +96,5 @@ export const updatePost = async (
     return { success: false, error };
   }
 };
+
+
