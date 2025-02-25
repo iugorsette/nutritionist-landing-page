@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import ReactMarkdown from "react-markdown";
 import { CommentSection } from "../components/CommentSection";
+import DOMPurify from "dompurify";
 
 import { Post as PostData } from "../types/Post";
 
@@ -52,10 +52,10 @@ export const Post = () => {
             className="w-full h-64 object-cover rounded-md mb-6"
           />
           <h1 className="text-4xl font-bold text-gray-900">{post.title}</h1>
-          <div className="prose prose-lg mt-4 text-gray-600">
-            <ReactMarkdown>{post.content.replace(/\\n/g, "\n")}</ReactMarkdown>
-          </div>
-
+          <div 
+            className="prose prose-lg mt-4 text-gray-600"
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+          />
           {postId && <CommentSection postId={postId} />}
         </>
       )}
