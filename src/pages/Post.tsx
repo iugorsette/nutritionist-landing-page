@@ -5,15 +5,12 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 import { CommentSection } from "../components/CommentSection";
 
-interface PostData {
-  imageUrl: string;
-  title: string;
-  content: string;
-}
+import { Post as PostData } from "../types/Post";
 
 export const Post = () => {
   const { slug } = useParams();
   const [post, setPost] = useState<PostData | null>(null);
+  const [postId, setPostId] = useState<string | null>(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,8 +23,12 @@ export const Post = () => {
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
-        const postData = querySnapshot.docs[0].data() as PostData;
-        setPost(postData);
+        const doc = querySnapshot.docs[0];
+        setPost({
+          id: doc.id, 
+          ...doc.data(),
+        } as PostData);
+        setPostId(doc.id);
       } else {
         setError("Post não encontrado.");
       }
@@ -55,7 +56,7 @@ export const Post = () => {
             <ReactMarkdown>{post.content.replace(/\\n/g, "\n")}</ReactMarkdown>
           </div>
 
-          <CommentSection postId={slug!} />
+          {postId && <CommentSection postId={postId} />}
         </>
       )}
     </div>

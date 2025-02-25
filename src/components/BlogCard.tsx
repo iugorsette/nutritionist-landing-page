@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import { Post } from "../types/Post";
-
-interface BlogCardProps {
-  post: Post;
-}
+import { BlogCardProps } from "../types/Blog";
 
 export const BlogCard = ({ post }: BlogCardProps) => {
   return (
