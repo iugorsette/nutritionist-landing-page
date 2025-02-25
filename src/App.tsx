@@ -10,6 +10,8 @@ import { Hero } from './pages/Hero'
 import { About } from './pages/About'
 import { Blog } from './pages/Blog'
 import { Post } from './pages/Post'
+import { AdminPanel } from './pages/AdminPanel'
+import { CreatePostPage } from './pages/CreatePostPage'
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Hero />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/admin/new" element={<CreatePostPage />} />
+          <Route path="/admin/edit/:id" element={<CreatePostPage />} />
           <Route path="/nutricao-personalizada" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<Post />} />

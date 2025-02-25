@@ -38,8 +38,8 @@ export const Navbar = () => {
             </Link>
             {
               emailsPermitidos.includes(user?.email || "") && (
-                <Link to="/new-post" className={`${isActive("/new-post")} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
-                  Novo Post
+                <Link to="/admin" className={`${isActive("/admin")} hover:text-primary-dark px-3 py-2 text-sm font-medium transition-colors`}>
+                  Painel de Admin
                 </Link>
               )
             }
