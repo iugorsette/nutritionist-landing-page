@@ -3,7 +3,7 @@
 |---|---------------------------|-------|
 |✅ | Usuário que criou o post	| 🗹 |
 |🚀 | Categorias e Tags	| ☐ |
-|🚀 | Sistema de Comentários	| ☐ |
+|🚀 | Sistema de Comentários	| 🗹 |
 |🚀 | Paginação ou Scroll Infinito	| ☐ |
 |🚀 | Pesquisa de Posts	| ☐ |
 |🚀 | Compartilhamento em Redes Sociais	| ☐ |

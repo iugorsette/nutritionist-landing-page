@@ -10,9 +10,10 @@ import { Post as PostData } from "../types/Post";
 export const Post = () => {
   const { slug } = useParams();
   const [post, setPost] = useState<PostData | null>(null);
-  const [postId, setPostId] = useState<string | null>(null); 
+  const [postId, setPostId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false); // Estado para abrir/fechar modal
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -25,7 +26,7 @@ export const Post = () => {
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
         setPost({
-          id: doc.id, 
+          id: doc.id,
           ...doc.data(),
         } as PostData);
         setPostId(doc.id);
@@ -46,17 +47,45 @@ export const Post = () => {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       {post && (
         <>
+          {/* Imagem clicável para abrir modal */}
           <img
             src={post.imageUrl}
             alt={post.title}
-            className="w-full h-64 object-cover rounded-md mb-6"
+            className="w-full h-64 object-cover rounded-md mb-6 cursor-pointer transition-transform hover:scale-105"
+            onClick={() => setShowModal(true)}
           />
+
           <h1 className="text-4xl font-bold text-gray-900">{post.title}</h1>
-          <div 
+
+          {/* Renderiza conteúdo HTML formatado */}
+          <div
             className="prose prose-lg mt-4 text-gray-600"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
           />
+
           {postId && <CommentSection postId={postId} />}
+
+          {/* Modal para exibição da imagem em tamanho grande */}
+          {showModal && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+              onClick={() => setShowModal(false)}
+            >
+              <div className="relative">
+                <button
+                  className="absolute top-2 right-2 text-white text-3xl font-bold"
+                  onClick={() => setShowModal(false)}
+                >
+                  &times;
+                </button>
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="max-w-full max-h-screen rounded-lg"
+                />
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>

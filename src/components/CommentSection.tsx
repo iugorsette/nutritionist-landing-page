@@ -84,9 +84,11 @@ export const CommentSection = ({ postId }: CommentSectionProps) => {
             required
             className="w-full px-3 py-2 border rounded-md"
           />
-          <button type="submit" className="mt-2 bg-primary text-white px-4 py-2 rounded-md">
-            Comentar
-          </button>
+          <div className="flex justify-end">
+            <button type="submit" className="mt-2 bg-primary text-white px-4 py-2 rounded-md">
+              Comentar
+            </button>
+          </div>
         </form>
       ) : (
         <div className="flex items-baseline gap-2 content-center">

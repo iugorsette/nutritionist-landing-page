@@ -115,12 +115,14 @@ export const NewPost = () => {
         <img src={previewUrl} alt="Preview" className="w-full h-48 object-cover mt-2 rounded-md" />
       )}
       
+      <div className="flex justify-end">
       <button 
         type="submit" 
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
         Criar Post
       </button>
+      </div>
     </form>
   );
 };
