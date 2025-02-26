@@ -55,17 +55,15 @@ export const Post = () => {
             onClick={() => setShowModal(true)}
           />
 
-          <h1 className="text-4xl font-bold text-gray-900">{post.title}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{post.title}</h1>
 
-          {/* Renderiza conteúdo HTML formatado */}
           <div
-            className="prose prose-lg mt-4 text-gray-600"
+            className="prose prose-lg mt-4 text-gray-600 dark:text-gray-200"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
           />
 
           {postId && <CommentSection postId={postId} />}
 
-          {/* Modal para exibição da imagem em tamanho grande */}
           {showModal && (
             <div
               className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
